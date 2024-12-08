@@ -12,6 +12,7 @@ Complete installation and setup guide for xAPI LRS on Ubuntu Server.
 ```bash
 sudo apt update
 sudo apt upgrade -y
+```
 
 ### 2. Install Node.js and NPM
 ```bash
