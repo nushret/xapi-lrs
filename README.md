@@ -50,16 +50,41 @@ Copy the complete app.js content from the repository.
 mkdir public
 nano public/index.html
 ```
-Copy the complete index.html content.
+Copy the complete index.html content from the repository.
 
-### 4. Install PM2 Process Manager
+### 7. Initialize Project and Install Dependencies
 ```bash
+npm init -y
+npm install express mongoose body-parser cors basic-auth dotenv
 ```
 
-### 4. Install PM2 Process Manager
+### 8. Configure Environment Variables
 ```bash
+nano .env
+```
+Add these lines:
+```bash
+LRS_USERNAME=admin
+LRS_PASSWORD=secure_password
 ```
 
-### 4. Install PM2 Process Manager
+### 9. Start Application
 ```bash
+pm2 start app.js --name xapi-lrs
+pm2 startup
+pm2 save
 ```
+### 10. Verify Installation
+Check MongoDB status:
+```bash
+sudo systemctl status mongodb
+```
+Check application logs:
+```bash
+pm2 logs xapi-lrs
+```
+Test the application:
+```bash
+curl http://localhost:3000
+```
+
