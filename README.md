@@ -32,14 +32,47 @@ sudo systemctl enable mongodb
 sudo npm install -g pm2
 ```
 
-### 5. Create Project Directory
+### 5. Apache2 Configuration for xAPI LRS
+```bash
+sudo apt install apache2
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+```
+
+Create Virtual Host Configuration:
+```bash
+sudo nano /etc/apache2/sites-available/xapi-lrs.conf
+```
+
+Add this configuration:
+```bash
+<VirtualHost *:80>
+    ServerName lrs.yourdomain.com
+    ServerAdmin webmaster@yourdomain.com
+
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:3000/
+    ProxyPassReverse / http://localhost:3000/
+
+    ErrorLog ${APACHE_LOG_DIR}/xapi-lrs-error.log
+    CustomLog ${APACHE_LOG_DIR}/xapi-lrs-access.log combined
+</VirtualHost>
+```
+
+Enable Site and Restart Apache:
+```bash
+sudo a2ensite xapi-lrs.conf
+sudo systemctl restart apache2
+```
+
+### 6. Create Project Directory
 ```bash
 sudo mkdir -p /opt/xapi-lrs
 sudo chown -R $USER:$USER /opt/xapi-lrs
 cd /opt/xapi-lrs
 ```
 
-### 6. Create Project Files
+### 7. Create Project Files
 ```bash
 nano app.js
 ```
@@ -52,13 +85,13 @@ nano public/index.html
 ```
 Copy the complete index.html content from the repository.
 
-### 7. Initialize Project and Install Dependencies
+### 8. Initialize Project and Install Dependencies
 ```bash
 npm init -y
 npm install express mongoose body-parser cors basic-auth dotenv
 ```
 
-### 8. Configure Environment Variables
+### 9. Configure Environment Variables
 ```bash
 nano .env
 ```
