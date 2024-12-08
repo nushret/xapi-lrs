@@ -43,13 +43,14 @@ cd /opt/xapi-lrs
 ```bash
 nano app.js
 ```
-
 Copy the complete app.js content from the repository.
-Create public/index.html:
+
+### Create public/index.html:
 ```bash
 mkdir public
 nano public/index.html
 ```
+Copy the complete index.html content.
 
 ### 4. Install PM2 Process Manager
 ```bash
